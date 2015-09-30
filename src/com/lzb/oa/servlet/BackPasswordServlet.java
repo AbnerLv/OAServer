@@ -1,8 +1,6 @@
 package com.lzb.oa.servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,44 +14,40 @@ import com.lzb.oa.dao.UserDAO;
 import com.lzb.oa.util.JsonUtil;
 
 /**
- * µÇÂ¼´¦Àí
+ * Íü¼ÇÃÜÂë
  * 
  * @author Abner
- * @Date 2015-09-29
+ * @Date 2015-09-30
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/login.json")
-public class LoginServlet extends BaseServlet {
+@WebServlet(name = "BackPasswordServlet", urlPatterns = "/back_password.json")
+public class BackPasswordServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginServlet() {
-		super();
-
-	}
-
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		
 		JSONObject jsonObj = getClientJSON(request);
-		String username = jsonObj.getString("UserName");
-		String password = jsonObj.getString("PassWord");
+		String emp_no = jsonObj.getString("empNo");
+		String emp_phone_no = jsonObj.getString("phoneNo");
+		String emp_identify = jsonObj.getString("identify");
 
+		System.out.println("emp_no = " + emp_no + " emp_phone_no = "
+				+ emp_phone_no + " emp_identify = " + emp_identify);
+		
 		Response response2 = new Response();
-
+		String emp_password = null;
 		try {
-			if (UserDAO.getInstance().validate(username, password)) {
-				response2.setSuccess("1");
-			} else {
-				response2.setSuccess("0");
-			}
+			emp_password = UserDAO.getInstance().BackPassword(emp_no, emp_phone_no, emp_identify);
+			response2.setEmp_password(emp_password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		sendXml(response, JsonUtil.createJsonString(response2));
-	}
 
+	}
+	
+	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
