@@ -3,22 +3,22 @@ package com.lzb.oa.bean;
 import java.util.Date;
 
 public class EmpInfo {
-	private String emp_nickname;
-	private String emp_name;
-	private String emp_sex;
-	private String emp_age;
-	private String emp_phone_no;
-	private String emp_email;
-	private String emp_no;
-	private String emp_department;
-	private String emp_position;
-	private Date emp_entry_date;
-	private Date emp_birthday;
-	private String emp_nation;
-	private String emp_identify;
-	private String emp_city;
-	private String emp_address;
-	private String emp_password;
+	private String emp_nickname;   //昵称
+	private String emp_name;       //员工姓名
+	private String emp_sex;        //员工性别
+	private String emp_age;        //员工年龄
+	private String emp_phone_no;   //员工手机号
+	private String emp_email;      //员工电子邮箱
+	private String emp_no;         //员工编号
+	private String emp_department; //员工所属部门
+	private String emp_position;   //员工的职位
+	private Date emp_entry_date;   //员工入职日期
+	private Date emp_birthday;     //员工生日
+	private String emp_nation;     //员工民簇
+	private String emp_identify;   //员工的身份证号
+	private String emp_city;       //员工所在城市
+	private String emp_address;    //员工家庭地址
+	private String emp_password;   //登录密码
 	
 	
 	public String getEmp_nickname() {
