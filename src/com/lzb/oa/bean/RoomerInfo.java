@@ -9,12 +9,18 @@ public class RoomerInfo {
 	private String roomer_sex;      //客户性别
 	private String roomer_phone_no; //客户手机号码
 	private String roomer_email;    //客户电子邮箱
-	private String roomer_home_no;  //房源编号
+	private String roomer_house_no;  //房源编号
 	private Date roomer_date;       //看房日期
 	private String roomer_period;   //看房时间段
 	private String roomer_rent;     //客户需求
-	private String roomer_complte;  //交易完成表示
+	private String roomer_complete;  //交易完成表示
 	private String roomer_emp_no;   //跟进员工
+	
+	private String house_city;
+	private String house_address;
+	
+	
+	
 	public String getRoomer_no() {
 		return roomer_no;
 	}
@@ -45,11 +51,11 @@ public class RoomerInfo {
 	public void setRoomer_email(String roomer_email) {
 		this.roomer_email = roomer_email;
 	}
-	public String getRoomer_home_no() {
-		return roomer_home_no;
+	public String getRoomer_house_no() {
+		return roomer_house_no;
 	}
-	public void setRoomer_home_no(String roomer_home_no) {
-		this.roomer_home_no = roomer_home_no;
+	public void setRoomer_house_no(String roomer_house_no) {
+		this.roomer_house_no = roomer_house_no;
 	}
 	public Date getRoomer_date() {
 		return roomer_date;
@@ -69,11 +75,11 @@ public class RoomerInfo {
 	public void setRoomer_rent(String roomer_rent) {
 		this.roomer_rent = roomer_rent;
 	}
-	public String getRoomer_complte() {
-		return roomer_complte;
+	public String getRoomer_complete() {
+		return roomer_complete;
 	}
-	public void setRoomer_complte(String roomer_complte) {
-		this.roomer_complte = roomer_complte;
+	public void setRoomer_complete(String roomer_complete) {
+		this.roomer_complete = roomer_complete;
 	}
 	public String getRoomer_emp_no() {
 		return roomer_emp_no;
@@ -85,23 +91,39 @@ public class RoomerInfo {
 		
 	}
 	public RoomerInfo(String roomer_no, String roomer_name, String roomer_sex,
-			String roomer_phone_no, String roomer_email, String roomer_home_no,
+			String roomer_phone_no, String roomer_email, String roomer_house_no,
 			Date roomer_date, String roomer_period, String roomer_rent,
-			String roomer_complte, String roomer_emp_no) {
+			String roomer_complete, String roomer_emp_no) {
 		super();
 		this.roomer_no = roomer_no;
 		this.roomer_name = roomer_name;
 		this.roomer_sex = roomer_sex;
 		this.roomer_phone_no = roomer_phone_no;
 		this.roomer_email = roomer_email;
-		this.roomer_home_no = roomer_home_no;
+		this.roomer_house_no = roomer_house_no;
 		this.roomer_date = roomer_date;
 		this.roomer_period = roomer_period;
 		this.roomer_rent = roomer_rent;
-		this.roomer_complte = roomer_complte;
+		this.roomer_complete = roomer_complete;
 		this.roomer_emp_no = roomer_emp_no;
 	}
 	
+	public String getHouse_city() {
+		return house_city;
+	}
+
+	public void setHouse_city(String house_city) {
+		this.house_city = house_city;
+	}
+
+	public String getHouse_address() {
+		return house_address;
+	}
+
+	public void setHouse_address(String house_address) {
+		this.house_address = house_address;
+	}
+
 	
 	
 

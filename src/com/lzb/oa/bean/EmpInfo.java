@@ -20,7 +20,6 @@ public class EmpInfo {
 	private String emp_address;    //员工家庭地址
 	private String emp_password;   //登录密码
 	
-	
 	public String getEmp_nickname() {
 		return emp_nickname;
 	}
@@ -146,8 +145,4 @@ public class EmpInfo {
 		this.emp_address = emp_address;
 		this.emp_password = emp_password;
 	}
-	
-	
-	
-
 }
