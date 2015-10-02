@@ -108,6 +108,16 @@ public class RoomerInfo {
 		this.roomer_emp_no = roomer_emp_no;
 	}
 	
+	
+	
+	public RoomerInfo(String roomer_no, String roomer_name,
+			String roomer_phone_no, Date roomer_date) {
+		super();
+		this.roomer_no = roomer_no;
+		this.roomer_name = roomer_name;
+		this.roomer_phone_no = roomer_phone_no;
+		this.roomer_date = roomer_date;
+	}
 	public String getHouse_city() {
 		return house_city;
 	}

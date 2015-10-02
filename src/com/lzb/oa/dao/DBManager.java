@@ -25,6 +25,7 @@ public class DBManager {
 	private Connection conn = null;
 	private PreparedStatement pstm = null;
 	private CallableStatement cstm = null;
+	private ResultSet rs = null;
 
 	private DBManager() throws IOException {
 		bundle = new PropertyResourceBundle(
@@ -113,8 +114,6 @@ public class DBManager {
 	}
 
 	/**
-	 * æ‰§è¡ŒæŸ¥è¯¢
-	 * 
 	 * @param sql
 	 *            sqlÓï¾ä
 	 * @param params
@@ -130,11 +129,10 @@ public class DBManager {
 	}
 
 	public ResultSet executeQuery(String sql) throws SQLException {
-		ResultSet rs = null;
+		
 		Statement statement = null;
 		statement = conn.createStatement();
-		rs = statement.executeQuery(sql);
-		return rs;
+		return statement.executeQuery(sql);
 	}
 
 	/**
