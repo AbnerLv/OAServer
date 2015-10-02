@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.PropertyResourceBundle;
 
-
 public class DBManager {
 
 	private static DBManager manager = null;
@@ -99,14 +98,14 @@ public class DBManager {
 	 * @param sql
 	 *            sql语句
 	 * @param params
-	 *           sql语句的中参数值
+	 *            sql语句的中参数值
 	 * @throws SQLException
 	 */
 	private void setPrepareStatementParams(String sql, Object[] params)
 			throws SQLException {
 		pstm = conn.prepareStatement(sql); // 对sql预编译
 		if (params != null) {
-			for (int i = 0; i < params.length; i++) //设置sql语句中的变量值
+			for (int i = 0; i < params.length; i++) // 设置sql语句中的变量值
 			{
 				pstm.setObject(i + 1, params[i]);
 			}
@@ -119,19 +118,18 @@ public class DBManager {
 	 * @param sql
 	 *            sql语句
 	 * @param params
-	 *           // sql语句的中参数值
+	 *            // sql语句的中参数值
 	 * @return fanh
 	 * @throws SQLException
 	 */
 	public ResultSet executeQuery(String sql, Object[] params)
-			throws SQLException { 
+			throws SQLException {
 		ResultSet rs = null;
-		manager.setPrepareStatementParams(sql, params); 
+		manager.setPrepareStatementParams(sql, params);
 		return rs;
 	}
-	
-	public ResultSet executeQuery(String sql)
-			throws SQLException { 
+
+	public ResultSet executeQuery(String sql) throws SQLException {
 		ResultSet rs = null;
 		Statement statement = null;
 		statement = conn.createStatement();
@@ -142,26 +140,36 @@ public class DBManager {
 	/**
 	 * 
 	 * @param sql
-	 *      
+	 * 
 	 * @param params
-	 *       
-	 * @return 
+	 * 
+	 * @return
 	 * @throws SQLException
 	 */
 	public boolean executeUpdate(String sql, Object[] params)
-			throws SQLException 
-	{
+			throws SQLException {
 		boolean result = false;
-		manager.setPrepareStatementParams(sql, params); 
-		manager.commitChange();
+		manager.setPrepareStatementParams(sql, params);
+		conn.commit();
 		result = true;
 		return result;
 	}
-    /*
+
+	/**
+	 * 
+	 * @param sql
+	 *            sql语句
+	 * @return either (1) the row count for SQL Data Manipulation Language (DML)
+	 *         statements or (2) 0 for SQL statements that return nothing
 	 * @throws SQLException
 	 */
-	private void commitChange() throws SQLException {
-		conn.commit();
+	public int executeUpdate(String sql) throws SQLException {
+		int result = 0;
+		Statement statement = null;
+		statement = conn.createStatement();
+		result = statement.executeUpdate(sql);
+		conn.commit(); // 注意，更新之后，事务提交
+		return result;
 	}
 
 }

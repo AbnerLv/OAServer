@@ -3,14 +3,9 @@ package com.lzb.oa.dao;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.bean.HouseInfo;
-import com.lzb.oa.bean.Response;
 import com.lzb.oa.bean.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 

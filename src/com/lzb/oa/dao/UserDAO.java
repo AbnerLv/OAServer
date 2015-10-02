@@ -33,12 +33,11 @@ public class UserDAO {
 	 */
 	public boolean validate(String username, String password) {
 		boolean flag = false;
-		String sql = "select * from emp_info where emp_password='"
-				+ password + "' and emp_nickname='" + username
-				+ "' or emp_no ='" + username + "' or emp_phone_no='"
-				+ username + "'";
+		String sql = "select * from emp_info where emp_password='" + password
+				+ "' and emp_nickname='" + username + "' or emp_no ='"
+				+ username + "' or emp_phone_no='" + username + "'";
 		// Object[] params = new
-					// Object[]{password,username,username,username};
+		// Object[]{password,username,username,username};
 		try {
 			manager.connDB();
 			boolean row = manager.executeQuery(sql).next();
@@ -53,7 +52,6 @@ public class UserDAO {
 		return flag;
 	}
 
-	
 	public String BackPassword(String emp_no, String emp_phone_no,
 			String emp_identify) {
 		String sql = "select emp_password from emp_info where emp_no = '"
@@ -63,7 +61,7 @@ public class UserDAO {
 		try {
 			manager.connDB();
 			ResultSet rs = manager.executeQuery(sql);
-			while(rs.next()){
+			while (rs.next()) {
 				password = rs.getString("emp_password");
 			}
 			manager.closeDB();
@@ -72,6 +70,25 @@ public class UserDAO {
 		}
 		System.out.println("password = " + password);
 		return password;
+	}
+
+	public int ChangePassword(String username, String oldPassword,
+			String newPassword) {
+		String sql = "update emp_info set emp_password = '" + newPassword
+				+ "' where emp_password='" + oldPassword
+				+ "' and emp_nickname='" + username + "' or emp_no ='"
+				+ username + "' or emp_phone_no='" + username + "'";
+		System.out.println(sql);
+		int flag = 0;
+		try {
+			manager.connDB();
+			flag = manager.executeUpdate(sql);
+			System.out.println("flag = " + flag);
+			manager.closeDB();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }
