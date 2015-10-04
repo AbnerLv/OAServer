@@ -91,4 +91,23 @@ public class UserDAO {
 		return flag;
 	}
 
+	public int register(String empPhoneNo, String empNickname,
+			String empNo, String empName, String empPassword) {
+		int flag = 0;
+		String sql = "update emp_info set emp_nickname = '" + empNickname
+				+ "',emp_name = '" + empName + "', emp_phone_no = '"
+				+ empPhoneNo + "',emp_password = '" + empPassword
+				+ "' where emp_no = '" + empNo + "'";
+		System.out.println(sql);
+		try {
+			manager.connDB();
+			flag = manager.executeUpdate(sql);
+			System.out.println("flag = " + flag);
+			manager.closeDB();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

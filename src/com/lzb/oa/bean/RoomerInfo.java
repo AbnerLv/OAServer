@@ -1,7 +1,5 @@
 package com.lzb.oa.bean;
 
-import java.util.Date;
-
 public class RoomerInfo {
 	
 	private String roomer_no;       //客户编号
@@ -10,7 +8,7 @@ public class RoomerInfo {
 	private String roomer_phone_no; //客户手机号码
 	private String roomer_email;    //客户电子邮箱
 	private String roomer_house_no;  //房源编号
-	private Date roomer_date;       //看房日期
+	private String roomer_date;       //看房日期
 	private String roomer_period;   //看房时间段
 	private String roomer_rent;     //客户需求
 	private String roomer_complete;  //交易完成表示
@@ -57,10 +55,10 @@ public class RoomerInfo {
 	public void setRoomer_house_no(String roomer_house_no) {
 		this.roomer_house_no = roomer_house_no;
 	}
-	public Date getRoomer_date() {
+	public String getRoomer_date() {
 		return roomer_date;
 	}
-	public void setRoomer_date(Date roomer_date) {
+	public void setRoomer_date(String roomer_date) {
 		this.roomer_date = roomer_date;
 	}
 	public String getRoomer_period() {
@@ -92,7 +90,7 @@ public class RoomerInfo {
 	}
 	public RoomerInfo(String roomer_no, String roomer_name, String roomer_sex,
 			String roomer_phone_no, String roomer_email, String roomer_house_no,
-			Date roomer_date, String roomer_period, String roomer_rent,
+			String roomer_date, String roomer_period, String roomer_rent,
 			String roomer_complete, String roomer_emp_no) {
 		super();
 		this.roomer_no = roomer_no;
@@ -111,7 +109,7 @@ public class RoomerInfo {
 	
 	
 	public RoomerInfo(String roomer_no, String roomer_name,
-			String roomer_phone_no, Date roomer_date) {
+			String roomer_phone_no, String roomer_date) {
 		super();
 		this.roomer_no = roomer_no;
 		this.roomer_name = roomer_name;

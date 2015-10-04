@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet;
+package com.lzb.oa.servlet.user;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.bean.Response;
 import com.lzb.oa.dao.UserDAO;
+import com.lzb.oa.servlet.BaseServlet;
 import com.lzb.oa.util.JsonUtil;
 
 /**

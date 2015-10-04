@@ -38,7 +38,7 @@ public class CustomerManagerDAO {
 				String roomer_no = rs.getString("roomer_no");
 				String roomer_name = rs.getString("roomer_name");
 				String roomer_phone_no = rs.getString("roomer_phone_no");
-				Date roomer_date = rs.getDate("roomer_date");
+				String roomer_date = rs.getDate("roomer_date").toString();
 
 				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name,
 						roomer_phone_no, roomer_date);

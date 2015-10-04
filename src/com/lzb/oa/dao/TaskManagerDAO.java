@@ -42,7 +42,7 @@ public class TaskManagerDAO {
 				String roomer_sex = rs.getString("roomer_sex");
 				String roomer_phone_no = rs.getString("roomer_phone_no");
 				String roomer_house_no = rs.getString("roomer_house_no");
-				Date roomer_date = rs.getDate("roomer_date");
+				String roomer_date = rs.getDate("roomer_date").toString();
 				String roomer_period = rs.getString("roomer_period");
 				String roomer_rent = rs.getString("roomer_rent");
 				String roomer_complete = rs.getString("roomer_complete");
