@@ -3,6 +3,7 @@ package com.lzb.oa.servlet.user;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.bean.Response;
 import com.lzb.oa.dao.UserDAO;
@@ -40,19 +42,13 @@ public class LoginServlet extends BaseServlet {
 		JSONObject jsonObj = getClientJSON(request);
 		String username = jsonObj.getString("UserName");
 		String password = jsonObj.getString("PassWord");
-
-		Response response2 = new Response();
-
+		String json = null;
 		try {
-			if (UserDAO.getInstance().validate(username, password)) {
-				response2.setSuccess("1");
-			} else {
-				response2.setSuccess("0");
-			}
+			json = UserDAO.getInstance().checkLogin(username, password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		sendXml(response, JsonUtil.createJsonString(response2));
+		sendXml(response, json==null?"0":json);
 	}
 
 	protected void doPost(HttpServletRequest request,

@@ -28,7 +28,7 @@ public class TaskManagerDAO {
 	}
 
 	public JSONArray getTaskInfo() {
-		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no and roomer_emp_no is null or roomer_emp_no = '' order by roomer_date desc, roomer_period asc";
+		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
 		
 		JSONArray tasks = new JSONArray();
 		try {
@@ -49,10 +49,12 @@ public class TaskManagerDAO {
 				String roomer_emp_no = rs.getString("roomer_emp_no");
 				String house_city = rs.getString("house_city");
 				String house_address = rs.getString("house_address");
-				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name, roomer_sex, roomer_phone_no, null, roomer_house_no, roomer_date, roomer_period, roomer_rent, roomer_complete, roomer_emp_no);
+				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name, roomer_sex, roomer_phone_no, null, roomer_house_no,
+						roomer_date, roomer_period, roomer_rent, roomer_complete, roomer_emp_no==null?"":roomer_emp_no);
 				rInfo.setHouse_address(house_address);
 				rInfo.setHouse_city(house_city);
 				String json = JsonUtil.createJsonString(rInfo);
+				System.out.println(json);
 				tasks.add(json);	
 			}
 			manager.closeDB();

@@ -18,7 +18,7 @@ import com.lzb.oa.util.JsonUtil;
  * ÓÃ»§×¢²á
  */
 @WebServlet(name="/ResgisterServlet", urlPatterns="/register.json")
-public class ResgisterServlet extends BaseServlet {
+public class RegisterServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
    
