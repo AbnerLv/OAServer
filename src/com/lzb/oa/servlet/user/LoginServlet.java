@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.bean.Response;
 import com.lzb.oa.dao.UserDAO;
+import com.lzb.oa.entity.Response;
 import com.lzb.oa.servlet.BaseServlet;
 import com.lzb.oa.util.JsonUtil;
 
@@ -48,7 +48,7 @@ public class LoginServlet extends BaseServlet {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		sendXml(response, json==null?"0":json);
+		sendXml(response,json);
 	}
 
 	protected void doPost(HttpServletRequest request,

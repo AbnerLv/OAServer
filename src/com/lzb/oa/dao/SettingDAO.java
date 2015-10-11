@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lzb.oa.bean.RoomerInfo;
+import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
 public class SettingDAO {

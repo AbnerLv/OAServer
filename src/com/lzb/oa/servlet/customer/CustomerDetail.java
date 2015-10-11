@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.user;
+package com.lzb.oa.servlet.customer;
 
 import java.io.IOException;
 
@@ -9,43 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lzb.oa.dao.CustomerManagerDAO;
 import com.lzb.oa.dao.UserDAO;
-import com.lzb.oa.entity.Response;
 import com.lzb.oa.servlet.BaseServlet;
-import com.lzb.oa.util.JsonUtil;
 
 /**
- * 修改密码
- * @author Abner
- * @date 2015-10-2
- *
+ * 获取客户的详细信息
  */
-@WebServlet(name="ChangePassServlet",urlPatterns = "/change_pass.json")
-public class ChangePassServlet extends BaseServlet {
+@WebServlet(name="/CustomerDetail",urlPatterns="/get_customer_detail.json")
+public class CustomerDetail extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
-  
-	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		JSONObject jsonObj = getClientJSON(request);
-		String userName = jsonObj.getString("userName");
-		String oldPass = jsonObj.getString("oldPass");
-		String newPass = jsonObj.getString("newPass");
-		Response response2 = new Response();
-		int success = 0;
+		String roomerNo = jsonObj.getString("roomer_no");
+		String json = null;
 		try {
-			success = UserDAO.getInstance().ChangePassword(userName, oldPass, newPass);
+			json = CustomerManagerDAO.getInstance().getCustomerDetailInfo(roomerNo);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		response2.setSuccess(success+"");
-		sendXml(response, JsonUtil.createJsonString(response2));
+		sendXml(response, json);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

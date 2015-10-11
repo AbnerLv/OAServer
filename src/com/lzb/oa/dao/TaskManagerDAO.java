@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lzb.oa.bean.RoomerInfo;
+import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
 public class TaskManagerDAO {

@@ -7,7 +7,7 @@ import java.util.Date;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.bean.EmpInfo;
+import com.lzb.oa.entity.EmpInfo;
 import com.lzb.oa.util.JsonUtil;
 
 public class UserDAO {

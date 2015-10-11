@@ -1,4 +1,4 @@
-package com.lzb.oa.bean;
+package com.lzb.oa.entity;
 
 public class RoomerInfo {
 	

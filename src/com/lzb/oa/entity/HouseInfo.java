@@ -1,4 +1,4 @@
-package com.lzb.oa.bean;
+package com.lzb.oa.entity;
 
 public class HouseInfo {
 	private String house_no; // 房源编号
@@ -10,7 +10,7 @@ public class HouseInfo {
 	private String house_address; // 房子详细地址
 	private String house_green_rating; // 小区绿化面积
 	private String house_property; // 小区物业
-	private String house_ownwe_name; // 房东姓名
+	private String house_owner_name; // 房东姓名
 	private String house_owner_phone_no; // 房东联系方式
 	private String house_emp_no; // 跟进员工号
 	private String house_out_flag; // 交易是否完成（0：完成/1：未完成）
@@ -88,12 +88,14 @@ public class HouseInfo {
 		this.house_property = house_property;
 	}
 
-	public String getHouse_ownwe_name() {
-		return house_ownwe_name;
+	
+
+	public String getHouse_owner_name() {
+		return house_owner_name;
 	}
 
-	public void setHouse_ownwe_name(String house_ownwe_name) {
-		this.house_ownwe_name = house_ownwe_name;
+	public void setHouse_owner_name(String house_owner_name) {
+		this.house_owner_name = house_owner_name;
 	}
 
 	public String getHouse_owner_phone_no() {
@@ -127,7 +129,7 @@ public class HouseInfo {
 	public HouseInfo(String house_no, String house_type, String house_area,
 			String house_price, String house_flag, String house_city,
 			String house_address, String house_green_rating,
-			String house_property, String house_ownwe_name,
+			String house_property, String house_owner_name,
 			String house_owner_phone_no, String house_emp_no,
 			String house_out_flag) {
 		super();
@@ -140,7 +142,7 @@ public class HouseInfo {
 		this.house_address = house_address;
 		this.house_green_rating = house_green_rating;
 		this.house_property = house_property;
-		this.house_ownwe_name = house_ownwe_name;
+		this.house_owner_name = house_owner_name;
 		this.house_owner_phone_no = house_owner_phone_no;
 		this.house_emp_no = house_emp_no;
 		this.house_out_flag = house_out_flag;
