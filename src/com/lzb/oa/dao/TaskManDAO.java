@@ -9,22 +9,22 @@ import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
-public class TaskManagerDAO {
+public class TaskManDAO {
 
-	private DBManager manager;
-	private static TaskManagerDAO dao;
+	private DBMan manager;
+	private static TaskManDAO dao;
 
-	public static TaskManagerDAO getInstance() throws ClassNotFoundException,
+	public static TaskManDAO getInstance() throws ClassNotFoundException,
 			IOException {
 		if (dao == null) {
-			dao = new TaskManagerDAO();
+			dao = new TaskManDAO();
 		}
 		return dao;
 	}
 	
 	
-	public TaskManagerDAO() throws ClassNotFoundException, IOException{
-		manager = DBManager.getInstance();
+	public TaskManDAO() throws ClassNotFoundException, IOException{
+		manager = DBMan.getInstance();
 	}
 
 	public JSONArray getTaskInfo() {

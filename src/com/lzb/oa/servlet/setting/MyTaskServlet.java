@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.SettingDAO;
-import com.lzb.oa.dao.TaskManagerDAO;
+import com.lzb.oa.dao.TaskManDAO;
 import com.lzb.oa.servlet.BaseServlet;
 
 /**

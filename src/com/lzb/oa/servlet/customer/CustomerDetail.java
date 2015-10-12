@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.dao.CustomerManagerDAO;
+import com.lzb.oa.dao.CustomerManDAO;
 import com.lzb.oa.dao.UserDAO;
 import com.lzb.oa.servlet.BaseServlet;
 
@@ -26,7 +26,7 @@ public class CustomerDetail extends BaseServlet {
 		String roomerNo = jsonObj.getString("roomer_no");
 		String json = null;
 		try {
-			json = CustomerManagerDAO.getInstance().getCustomerDetailInfo(roomerNo);
+			json = CustomerManDAO.getInstance().getCustomerDetailInfo(roomerNo);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

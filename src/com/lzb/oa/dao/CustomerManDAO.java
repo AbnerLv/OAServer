@@ -11,21 +11,21 @@ import com.lzb.oa.entity.CustomerInfo;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
-public class CustomerManagerDAO {
+public class CustomerManDAO {
 
-	private DBManager manager;
-	private static CustomerManagerDAO dao;
+	private DBMan manager;
+	private static CustomerManDAO dao;
 
-	public static CustomerManagerDAO getInstance()
+	public static CustomerManDAO getInstance()
 			throws ClassNotFoundException, IOException {
 		if (dao == null) {
-			dao = new CustomerManagerDAO();
+			dao = new CustomerManDAO();
 		}
 		return dao;
 	}
 
-	public CustomerManagerDAO() throws ClassNotFoundException, IOException {
-		manager = DBManager.getInstance();
+	public CustomerManDAO() throws ClassNotFoundException, IOException {
+		manager = DBMan.getInstance();
 	}
 
 	public JSONArray getCustomerInfo() {

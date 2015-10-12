@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.PropertyResourceBundle;
 
-public class DBManager {
+public class DBMan {
 
-	private static DBManager manager = null;
+	private static DBMan manager = null;
 	private PropertyResourceBundle bundle;
 	private static String jdbcDrive = null;
 	private String dbHost = null;
@@ -27,9 +27,9 @@ public class DBManager {
 	private CallableStatement cstm = null;
 	private ResultSet rs = null;
 
-	private DBManager() throws IOException {
+	private DBMan() throws IOException {
 		bundle = new PropertyResourceBundle(
-				DBManager.class.getResourceAsStream("dbconfig.properties"));
+				DBMan.class.getResourceAsStream("dbconfig.properties"));
 		this.dbHost = getString("dbhost");
 		this.dbPort = getString("dbport");
 		this.dbName = getString("dbname");
@@ -58,10 +58,10 @@ public class DBManager {
 		Class.forName(jdbcDrive);
 	}
 
-	public static DBManager getInstance() throws IOException,
+	public static DBMan getInstance() throws IOException,
 			ClassNotFoundException {
 		if (manager == null) {
-			manager = new DBManager();
+			manager = new DBMan();
 			manager.initDB();
 		}
 		return manager;

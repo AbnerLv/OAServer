@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lzb.oa.dao.TaskManagerDAO;
+import com.lzb.oa.dao.TaskManDAO;
 import com.lzb.oa.servlet.BaseServlet;
 
 /**
@@ -26,7 +26,7 @@ public class TaskServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONArray tasks = null;
 		try {
-			tasks = TaskManagerDAO.getInstance().getTaskInfo();
+			tasks = TaskManDAO.getInstance().getTaskInfo();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

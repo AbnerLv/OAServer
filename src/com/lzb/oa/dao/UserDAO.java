@@ -12,7 +12,7 @@ import com.lzb.oa.util.JsonUtil;
 
 public class UserDAO {
 
-	private DBManager manager;
+	private DBMan manager;
 	private static UserDAO dao = null;
 
 	public static UserDAO getInstance() throws ClassNotFoundException,
@@ -24,7 +24,7 @@ public class UserDAO {
 	}
 
 	public UserDAO() throws ClassNotFoundException, IOException {
-		manager = DBManager.getInstance();
+		manager = DBMan.getInstance();
 
 	}
 

@@ -9,7 +9,7 @@ import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
 public class SettingDAO {
-	private DBManager manager;
+	private DBMan manager;
 	private static SettingDAO dao;
 
 	public static SettingDAO getInstance() throws ClassNotFoundException,
@@ -22,7 +22,7 @@ public class SettingDAO {
 	
 	
 	public SettingDAO() throws ClassNotFoundException, IOException{
-		manager = DBManager.getInstance();
+		manager = DBMan.getInstance();
 	}
 	
 	public JSONArray getMyTask(String emp_no) {

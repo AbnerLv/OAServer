@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lzb.oa.dao.CustomerManagerDAO;
+import com.lzb.oa.dao.CustomerManDAO;
 
 /**
  * 获取顾客信息
@@ -25,7 +25,7 @@ public class CustomerInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONArray info = null;
 		try {
-			info = CustomerManagerDAO.getInstance().getCustomerInfo();
+			info = CustomerManDAO.getInstance().getCustomerInfo();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
