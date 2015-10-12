@@ -75,23 +75,25 @@ public class TaskManDAO {
 	 * @param rommer_no
 	 * @return
 	 */
-	public String getTask(String emp_no, String roomer_no) {
+	public String getTask(String emp_no, String roomer_no,String roomer_house_no) {
 		String roomer_sql = "update roomer_info set roomer_emp_no = '" + emp_no
 				+ "' where roomer_no = '" + roomer_no + "'";
 		String house_sql = "update house_info set house_emp_no = '" + emp_no
-				+ "' where house_no = '" + roomer_no + "'";
+				+ "' where house_no = '" + roomer_house_no + "'";
 		String json="";
+		System.out.println(roomer_sql);
 		try {
 			manager.connDB();
-			boolean result_r = manager.executeQuery(roomer_sql).next();
-			boolean result_h = manager.executeQuery(house_sql).next();
+			int result_r = manager.executeUpdate(roomer_sql);
+			int result_h = manager.executeUpdate(house_sql);
 			Response resp = new Response();
-			if(result_r && result_h){
+			if(result_r > 0 && result_h > 0){
 				resp.setSuccess("1");
 			}else{
 				resp.setSuccess("0");
 			}
 			json = JsonUtil.createJsonString(resp);
+			manager.commit();
 			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,21 +106,24 @@ public class TaskManDAO {
 	 * @param rommer_no
 	 * @return
 	 */
-	public String cancelTask(String roomer_no) {
+	public String cancelTask(String roomer_no,String roomer_house_no) {
+		System.out.println("rommer_house_no"+roomer_house_no);
 		String roomer_sql = "update roomer_info set roomer_emp_no = null where roomer_no = '"+roomer_no+"'" ;
-		String house_sql = "update house_info set house_emp_no = null where house_no = '"+roomer_no+"'";
+		String house_sql = "update house_info set house_emp_no = null where house_no = '"+roomer_house_no+"'";
 		String json="";
 		try {
 			manager.connDB();
-			boolean result_r = manager.executeQuery(roomer_sql).next();
-			boolean result_h = manager.executeQuery(house_sql).next();
+			int result_r = manager.executeUpdate(roomer_sql);
+			int result_h = manager.executeUpdate(house_sql);
 			Response resp = new Response();
-			if(result_r && result_h){
+			if(result_r > 0 && result_h > 0){
 				resp.setSuccess("1");
 			}else{
 				resp.setSuccess("0");
 			}
 			json = JsonUtil.createJsonString(resp);
+			manager.commit();
+			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

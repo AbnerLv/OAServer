@@ -23,8 +23,9 @@ public class CancelTaskServlet extends BaseServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		JSONObject jsonObj = getClientJSON(request);
 		String roomer_no = jsonObj.getString("roomer_no");
+		String rommer_house_no = jsonObj.getString("roomer_house_no");
 		try {
-			String json = TaskManDAO.getInstance().cancelTask(roomer_no);
+			String json = TaskManDAO.getInstance().cancelTask(roomer_no,rommer_house_no);
 			sendXml(response, json);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

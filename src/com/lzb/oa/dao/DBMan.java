@@ -166,8 +166,12 @@ public class DBMan {
 		Statement statement = null;
 		statement = conn.createStatement();
 		result = statement.executeUpdate(sql);
-		conn.commit(); // 注意，更新之后，事务提交
 		return result;
+	}
+	
+	public void commit() throws SQLException{
+		conn.commit(); // 注意，更新之后，事务提交
+		
 	}
 
 }

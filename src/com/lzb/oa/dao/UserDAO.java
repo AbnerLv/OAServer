@@ -114,7 +114,7 @@ public class UserDAO {
 		try {
 			manager.connDB();
 			flag = manager.executeUpdate(sql);
-			System.out.println("flag = " + flag);
+			manager.commit();
 			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,7 +133,7 @@ public class UserDAO {
 		try {
 			manager.connDB();
 			flag = manager.executeUpdate(sql);
-			System.out.println("flag = " + flag);
+			manager.commit();
 			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();

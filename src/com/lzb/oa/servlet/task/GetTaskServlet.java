@@ -25,8 +25,9 @@ public class GetTaskServlet extends BaseServlet {
 		JSONObject jsonObj = getClientJSON(request);
 		String emp_no = jsonObj.getString("emp_no");
 		String roomer_no = jsonObj.getString("roomer_no");
+		String roomer_house_no = jsonObj.getString("roomer_house_no");
 		try {
-			String json = TaskManDAO.getInstance().getTask(emp_no, roomer_no);
+			String json = TaskManDAO.getInstance().getTask(emp_no, roomer_no,roomer_house_no);
 			sendXml(response,json);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
