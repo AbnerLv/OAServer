@@ -1,0 +1,42 @@
+package com.lzb.oa.servlet.task;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONObject;
+import com.lzb.oa.dao.TaskManDAO;
+import com.lzb.oa.servlet.BaseServlet;
+
+/**
+ * 领取任务
+ */
+@WebServlet(name="/GetTaskServlet",urlPatterns="/task/get_task.json")
+public class GetTaskServlet extends BaseServlet {
+	private static final long serialVersionUID = 1L;
+       
+ 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		JSONObject jsonObj = getClientJSON(request);
+		String emp_no = jsonObj.getString("emp_no");
+		String roomer_no = jsonObj.getString("roomer_no");
+		try {
+			String json = TaskManDAO.getInstance().getTask(emp_no, roomer_no);
+			sendXml(response,json);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
+	}
+
+}

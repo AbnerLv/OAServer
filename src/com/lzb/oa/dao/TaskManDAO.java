@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.lzb.oa.entity.Response;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
 
@@ -21,22 +23,21 @@ public class TaskManDAO {
 		}
 		return dao;
 	}
-	
-	
-	public TaskManDAO() throws ClassNotFoundException, IOException{
+
+	public TaskManDAO() throws ClassNotFoundException, IOException {
 		manager = DBMan.getInstance();
 	}
 
 	public JSONArray getTaskInfo() {
 		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
-		
+
 		JSONArray tasks = new JSONArray();
 		try {
-			
+
 			manager.connDB();
 			ResultSet rs = manager.executeQuery(sql);
-			while(rs.next()){
-				
+			while (rs.next()) {
+
 				String roomer_no = rs.getString("roomer_no");
 				String roomer_name = rs.getString("roomer_name");
 				String roomer_sex = rs.getString("roomer_sex");
@@ -49,13 +50,16 @@ public class TaskManDAO {
 				String roomer_emp_no = rs.getString("roomer_emp_no");
 				String house_city = rs.getString("house_city");
 				String house_address = rs.getString("house_address");
-				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name, roomer_sex, roomer_phone_no, null, roomer_house_no,
-						roomer_date, roomer_period, roomer_rent, roomer_complete, roomer_emp_no==null?"":roomer_emp_no);
+				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name,
+						roomer_sex, roomer_phone_no, null, roomer_house_no,
+						roomer_date, roomer_period, roomer_rent,
+						roomer_complete, roomer_emp_no == null ? ""
+								: roomer_emp_no);
 				rInfo.setHouse_address(house_address);
 				rInfo.setHouse_city(house_city);
 				String json = JsonUtil.createJsonString(rInfo);
 				System.out.println(json);
-				tasks.add(json);	
+				tasks.add(json);
 			}
 			manager.closeDB();
 		} catch (SQLException e) {
@@ -63,6 +67,62 @@ public class TaskManDAO {
 			e.printStackTrace();
 		}
 		return tasks;
+	}
+
+	/**
+	 * 领取任务
+	 * @param emp_no
+	 * @param rommer_no
+	 * @return
+	 */
+	public String getTask(String emp_no, String roomer_no) {
+		String roomer_sql = "update roomer_info set roomer_emp_no = '" + emp_no
+				+ "' where roomer_no = '" + roomer_no + "'";
+		String house_sql = "update house_info set house_emp_no = '" + emp_no
+				+ "' where house_no = '" + roomer_no + "'";
+		String json="";
+		try {
+			manager.connDB();
+			boolean result_r = manager.executeQuery(roomer_sql).next();
+			boolean result_h = manager.executeQuery(house_sql).next();
+			Response resp = new Response();
+			if(result_r && result_h){
+				resp.setSuccess("1");
+			}else{
+				resp.setSuccess("0");
+			}
+			json = JsonUtil.createJsonString(resp);
+			manager.closeDB();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	/**
+	 * 取消任务
+	 * @param rommer_no
+	 * @return
+	 */
+	public String cancelTask(String roomer_no) {
+		String roomer_sql = "update roomer_info set roomer_emp_no = null where roomer_no = '"+roomer_no+"'" ;
+		String house_sql = "update house_info set house_emp_no = null where house_no = '"+roomer_no+"'";
+		String json="";
+		try {
+			manager.connDB();
+			boolean result_r = manager.executeQuery(roomer_sql).next();
+			boolean result_h = manager.executeQuery(house_sql).next();
+			Response resp = new Response();
+			if(result_r && result_h){
+				resp.setSuccess("1");
+			}else{
+				resp.setSuccess("0");
+			}
+			json = JsonUtil.createJsonString(resp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 }
