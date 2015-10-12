@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet;
+package com.lzb.oa.servlet.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
