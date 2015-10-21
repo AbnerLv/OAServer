@@ -25,7 +25,6 @@ public class DBMan {
 	private Connection conn = null;
 	private PreparedStatement pstm = null;
 	private CallableStatement cstm = null;
-	private ResultSet rs = null;
 
 	private DBMan() throws IOException {
 		bundle = new PropertyResourceBundle(
@@ -74,86 +73,31 @@ public class DBMan {
 	 */
 	public void connDB() throws SQLException {
 		conn = DriverManager.getConnection(strConn, dbUser, dbPasswd);
-		conn.setAutoCommit(false);
+
 	}
 
 	/**
-	 * 关闭数据库
-	 * 
-	 * @throws SQLException
-	 */
-	public void closeDB() throws SQLException {
-		if (pstm != null) {
-			pstm.close();
-		}
-		if (cstm != null) {
-			cstm.close();
-		}
-		if (conn != null) {
-			conn.close();
-		}
-	}
-
-	/**
+	 * 执行查询操作
 	 * 
 	 * @param sql
-	 *            sql语句
-	 * @param params
-	 *            sql语句的中参数值
-	 * @throws SQLException
-	 */
-	private void setPrepareStatementParams(String sql, Object[] params)
-			throws SQLException {
-		pstm = conn.prepareStatement(sql); // 对sql预编译
-		if (params != null) {
-			for (int i = 0; i < params.length; i++) // 设置sql语句中的变量值
-			{
-				pstm.setObject(i + 1, params[i]);
-			}
-		}
-	}
-
-	/**
-	 * @param sql
-	 *            sql语句
-	 * @param params
-	 *            // sql语句的中参数值
-	 * @return fanh
-	 * @throws SQLException
-	 */
-	public ResultSet executeQuery(String sql, Object[] params)
-			throws SQLException {
-		ResultSet rs = null;
-		manager.setPrepareStatementParams(sql, params);
-		return rs;
-	}
-
-	public ResultSet executeQuery(String sql) throws SQLException {
-		
-		Statement statement = null;
-		statement = conn.createStatement();
-		return statement.executeQuery(sql);
-	}
-
-	/**
-	 * 
-	 * @param sql
-	 * 
-	 * @param params
-	 * 
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean executeUpdate(String sql, Object[] params)
-			throws SQLException {
-		boolean result = false;
-		manager.setPrepareStatementParams(sql, params);
-		conn.commit();
-		result = true;
-		return result;
+	public ResultSet executeQuery(String sql) {
+
+		Statement statement = null;
+		ResultSet rs = null;
+		try {
+			statement = conn.createStatement();
+			rs = statement.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	/**
+	 * 执行更新语句
 	 * 
 	 * @param sql
 	 *            sql语句
@@ -161,17 +105,25 @@ public class DBMan {
 	 *         statements or (2) 0 for SQL statements that return nothing
 	 * @throws SQLException
 	 */
-	public int executeUpdate(String sql) throws SQLException {
+	public int executeUpdate(String sql) {
 		int result = 0;
-		Statement statement = null;
-		statement = conn.createStatement();
-		result = statement.executeUpdate(sql);
+		if (conn != null) {
+			Statement statement = null;
+			try {
+				conn.setAutoCommit(false);
+				statement = conn.createStatement();
+				result = statement.executeUpdate(sql);
+				conn.commit(); // 注意，更新之后，事务提交
+			} catch (Throwable e) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				throw new RuntimeException(e);
+			} 
+		}
 		return result;
-	}
-	
-	public void commit() throws SQLException{
-		conn.commit(); // 注意，更新之后，事务提交
-		
 	}
 
 }

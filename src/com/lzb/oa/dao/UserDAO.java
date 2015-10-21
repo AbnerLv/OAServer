@@ -71,7 +71,6 @@ public class UserDAO {
 				json = JsonUtil.createJsonString(emp);
 				
 			}  
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +94,6 @@ public class UserDAO {
 			while (rs.next()) {
 				password = rs.getString("emp_password");
 			}
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -114,8 +112,6 @@ public class UserDAO {
 		try {
 			manager.connDB();
 			flag = manager.executeUpdate(sql);
-			manager.commit();
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -133,8 +129,6 @@ public class UserDAO {
 		try {
 			manager.connDB();
 			flag = manager.executeUpdate(sql);
-			manager.commit();
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

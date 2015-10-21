@@ -47,9 +47,7 @@ public class CustomerManDAO {
 				String json = JsonUtil.createJsonString(rInfo);
 				info.add(json);
 			}
-			manager.closeDB();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return info;

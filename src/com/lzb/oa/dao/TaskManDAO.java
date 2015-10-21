@@ -37,7 +37,6 @@ public class TaskManDAO {
 			manager.connDB();
 			ResultSet rs = manager.executeQuery(sql);
 			while (rs.next()) {
-
 				String roomer_no = rs.getString("roomer_no");
 				String roomer_name = rs.getString("roomer_name");
 				String roomer_sex = rs.getString("roomer_sex");
@@ -61,7 +60,6 @@ public class TaskManDAO {
 				System.out.println(json);
 				tasks.add(json);
 			}
-			manager.closeDB();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,8 +91,6 @@ public class TaskManDAO {
 				resp.setSuccess("0");
 			}
 			json = JsonUtil.createJsonString(resp);
-			manager.commit();
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -122,8 +118,6 @@ public class TaskManDAO {
 				resp.setSuccess("0");
 			}
 			json = JsonUtil.createJsonString(resp);
-			manager.commit();
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

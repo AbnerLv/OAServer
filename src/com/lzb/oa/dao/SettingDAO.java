@@ -56,7 +56,6 @@ public class SettingDAO {
 				System.out.println(json);
 				tasks.add(json);	
 			}
-			manager.closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
