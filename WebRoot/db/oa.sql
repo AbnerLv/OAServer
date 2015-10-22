@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2015-10-11 00:43:50
+Date: 2015-10-22 21:14:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ CREATE TABLE `emp_info` (
 -- ----------------------------
 -- Records of emp_info
 -- ----------------------------
-INSERT INTO `emp_info` VALUES ('root', '张三', '男', '23', '13944556655', '1425211552@qq.com', 'E00001', '人事部', '普通员工', '2015-07-01', '1992-02-12', '汉族', '342923199201213010', '上海', '上海市浦东新区临港新城海港大道1550号', '1111111');
+INSERT INTO `emp_info` VALUES ('root', '张三', '男', '23', '13944556655', '1425211552@qq.com', 'E00001', '人事部', '普通员工', '2015-07-01', '1992-02-12', '汉族', '342923199201213010', '上海', '上海市浦东新区临港新城海港大道1550号', '222');
 INSERT INTO `emp_info` VALUES ('stupidman', '李四', '男', '25', '18017385655', '1605396773@qq.com', 'E00002', '销售部', '部门主管', '2015-07-02', '1985-07-05', '汉族', '342923199201243501', '上海', '上海市浦东新区浦建路725弄2号', '111');
 INSERT INTO `emp_info` VALUES ('candy', '王五', '女', '21', '18017523629', '24253262@qq.com', 'E00003', '财务部', '普通员工', '2015-07-03', '1994-06-05', '汉族', '52214235463224464457', '上海', '上海市徐汇区桂箐路69号', '111');
 INSERT INTO `emp_info` VALUES ('girl', '小米', '女', '22', '18012345678', '1234567@qq.com', 'E00004', '财务部', '部门主管', '2015-07-04', '1993-02-02', '汉族', '4564566789464647', '上海', '上海市浦东新区民生路1224弄', '111');
@@ -55,8 +55,8 @@ INSERT INTO `emp_info` VALUES ('goodbit', '赵七', '男', '24', '18652346633', 
 INSERT INTO `emp_info` VALUES ('test', '李丽', null, null, '13916423620', null, 'E00011', '技术部', '部门主管', '2015-03-03', null, null, null, null, null, '123');
 INSERT INTO `emp_info` VALUES ('Abner', '吕振斌', null, null, '18245058121', null, 'E00012', '培训部', '普通员工', '2015-08-08', null, '汉族', '32134654774899', null, null, '222222');
 INSERT INTO `emp_info` VALUES ('Abmrt', 'Hhhhhh', null, null, '18245058121', null, 'E00013', '培训部', '普通员工', '2015-08-08', null, '汉族', '32134633434374899', null, null, '333333');
-INSERT INTO `emp_info` VALUES ('', null, null, null, null, null, 'E00014', '技术部', '普通员工', '2015-08-08', null, '汉族', '321346332342344374899', null, null, null);
-INSERT INTO `emp_info` VALUES (null, null, null, null, null, null, 'E00015', '财务部', '普通员工', '2015-08-08', null, null, '342923200212120010', null, null, null);
+INSERT INTO `emp_info` VALUES ('Manager', '???', null, null, '18245058121', null, 'E00014', '技术部', '普通员工', '2015-08-08', null, '汉族', '321346332342344374899', null, null, '2222222');
+INSERT INTO `emp_info` VALUES ('Abner', 'bin', null, null, '18245058121', null, 'E00015', '财务部', '普通员工', '2015-08-08', null, null, '342923200212120010', null, null, '222222');
 INSERT INTO `emp_info` VALUES (null, null, null, null, null, null, 'E00016', '财务部', '普通员工', '2015-08-08', null, null, '342923200212120078', null, null, null);
 INSERT INTO `emp_info` VALUES (null, null, null, null, null, null, 'E00017', '财务部', '普通员工', '2015-08-08', null, null, '342923200212120078', null, null, null);
 INSERT INTO `emp_info` VALUES (null, null, null, null, null, null, 'E00018', '财务部', '普通员工', '2015-08-08', null, null, '342923200212120078', null, null, null);
@@ -80,16 +80,15 @@ CREATE TABLE `house_info` (
   `house_emp_no` varchar(50) DEFAULT NULL,
   `house_out_flag` varchar(50) DEFAULT '0',
   PRIMARY KEY (`house_no`),
-  KEY `house_emp_no` (`house_emp_no`),
-  CONSTRAINT `house_info_ibfk_1` FOREIGN KEY (`house_emp_no`) REFERENCES `emp_info` (`emp_no`)
+  KEY `house_emp_no` (`house_emp_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of house_info
 -- ----------------------------
 INSERT INTO `house_info` VALUES ('H00001', '三室两厅', '125平米', '7500元/月', '0', '上海', '上海市浦东新区南泉路金浦花园2号', '35%', '上海新兴物业', '金一', '13322445566', null, '0');
-INSERT INTO `house_info` VALUES ('H00002', '两室一厅', '80平米', '200万元', '1', '上海', '上海市浦东新区蓝村路23弄', '35%', '上海新兴物业', '钱而', '13322446688', 'E00001', '0');
-INSERT INTO `house_info` VALUES ('H00003', '一室一厅', '60平米', '3500元/月', '0', '上海', '上海市浦东新区蓝村路27弄', '35%', '上海新兴物业', '赵六', '13522446688', 'E00001', '0');
+INSERT INTO `house_info` VALUES ('H00002', '两室一厅', '80平米', '200万元', '1', '上海', '上海市浦东新区蓝村路23弄', '35%', '上海新兴物业', '钱而', '13322446688', null, '0');
+INSERT INTO `house_info` VALUES ('H00003', '一室一厅', '60平米', '3500元/月', '0', '上海', '上海市浦东新区蓝村路27弄', '35%', '上海新兴物业', '赵六', '13522446688', null, '0');
 INSERT INTO `house_info` VALUES ('H00004', '三室两厅', '100', '8500', '0', '上海', '上海市徐汇区桂箐路69号', '38%', '上海天山物业', '成哥', '18024569546', null, '0');
 INSERT INTO `house_info` VALUES ('H00005', '一室一厅', '35', '3500', '0', '上海', '浦东新区临港新城海港大道1550号', '28%', '上海海事大学', 'sha', '135665544565', null, '0');
 
@@ -178,16 +177,15 @@ CREATE TABLE `roomer_info` (
   `roomer_complete` varchar(50) DEFAULT NULL,
   `roomer_emp_no` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`roomer_no`),
-  KEY `roomer_emp_no` (`roomer_emp_no`),
-  CONSTRAINT `roomer_info_ibfk_1` FOREIGN KEY (`roomer_emp_no`) REFERENCES `emp_info` (`emp_no`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `roomer_emp_no` (`roomer_emp_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of roomer_info
 -- ----------------------------
 INSERT INTO `roomer_info` VALUES ('R00001', '刘鑫', '男', '18817572422', '1605396773@qq.com', 'H00001', '2014-02-05', '1', '0', '0', null);
-INSERT INTO `roomer_info` VALUES ('R00002', '丽丽', '女', '18817572442', '1605396773@qq.com', 'H00003', '2014-02-23', '3', '0', '0', 'E00001');
-INSERT INTO `roomer_info` VALUES ('R00003', '欣欣', '女', '18025456325', '1605396773@qq.com', 'H00002', '2014-02-23', '1', '1', '0', 'E00001');
+INSERT INTO `roomer_info` VALUES ('R00002', '丽丽', '女', '18817572442', '1605396773@qq.com', 'H00003', '2014-02-23', '3', '0', '0', null);
+INSERT INTO `roomer_info` VALUES ('R00003', '欣欣', '女', '18025456325', '1605396773@qq.com', 'H00002', '2014-02-23', '1', '1', '0', null);
 INSERT INTO `roomer_info` VALUES ('R00004', '小金', '男', '15866554451', '1605396773@qq.com', 'H00001', '2014-02-05', '2', '0', '0', null);
-INSERT INTO `roomer_info` VALUES ('R00005', '刘小静', '女', '15922556655', '1521364161@qq.com', 'H00004', '2015-05-05', '4', '0', '0', 'E00001');
-INSERT INTO `roomer_info` VALUES ('R00006', '小李', '男', '18025426952', '1605396773@qq.com', 'H00004', '2015-04-28', '2', '0', '0', null);
+INSERT INTO `roomer_info` VALUES ('R00005', '刘小静', '女', '15922556655', '1521364161@qq.com', 'H00004', '2015-05-05', '4', '0', '0', null);
+INSERT INTO `roomer_info` VALUES ('R00006', '小李', '男', '18025426952', '1605396773@qq.com', 'H00004', '2015-04-28', '2', '0', '0', 'E00005');
