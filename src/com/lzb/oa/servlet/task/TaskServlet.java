@@ -2,16 +2,17 @@ package com.lzb.oa.servlet.task;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.dao.TaskManDAO;
 import com.lzb.oa.servlet.BaseServlet;
+import com.lzb.oa.util.DevidePage;
 
 /**
  * Servlet implementation class TaskServlet
@@ -19,26 +20,50 @@ import com.lzb.oa.servlet.BaseServlet;
 @WebServlet(name = "TaskServlet", urlPatterns="/task_info.json")
 public class TaskServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
-
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONArray tasks = null;
-		try {
+    private JSONArray tasks = null;
+    private int toatlData = 0;
+    
+    public TaskServlet(){
+    	try {
 			tasks = TaskManDAO.getInstance().getTaskInfo();
+			toatlData = TaskManDAO.getInstance().getTotal();
 		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
 			e.printStackTrace();
 		}
+    }
+	
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String pageNo = request.getParameter("pageNo");
+		System.out.println("pageNo = "+ pageNo + "toatlData = "+ toatlData);
+		int currentPage = 1;
+		if(pageNo !=null){
+			currentPage = Integer.parseInt(pageNo);
+		}
+		DevidePage pageU = new DevidePage(4, toatlData ,currentPage);
+		int start = pageU.getFromIndex();
+		int end = pageU.getToIndex();
+		
 		response.setContentType("text/html;charset=utf-8");
-		 //页面输出JSONArray的内容  
-        PrintWriter out = response.getWriter();  
-        out.print(tasks);  
-        out.flush();
-        out.close();
+		PrintWriter out = response.getWriter();  //页面输出JSONArray的内容 
+        if(start > end){
+        	out.print("");  
+		}else{
+			out.print(tasks.subList(start, end));  
+		}
+		out.flush();
+		out.close();
+	
 	}
 
 	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

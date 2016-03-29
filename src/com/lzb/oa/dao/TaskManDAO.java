@@ -3,10 +3,7 @@ package com.lzb.oa.dao;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.entity.Response;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
@@ -15,6 +12,7 @@ public class TaskManDAO {
 
 	private DBMan manager;
 	private static TaskManDAO dao;
+	private int total=0;
 
 	public static TaskManDAO getInstance() throws ClassNotFoundException,
 			IOException {
@@ -28,14 +26,25 @@ public class TaskManDAO {
 		manager = DBMan.getInstance();
 	}
 
+	public int getTotal(){
+		return total;
+	}
+	
+	public void setTotal(int total){
+		this.total = total;
+	}
 	public JSONArray getTaskInfo() {
 		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
-
 		JSONArray tasks = new JSONArray();
 		try {
 
 			manager.connDB();
 			ResultSet rs = manager.executeQuery(sql);
+			rs.last();
+			int temp = rs.getRow();
+			System.out.println("TotalData = "+temp );
+			setTotal(temp);
+			rs.beforeFirst();
 			while (rs.next()) {
 				String roomer_no = rs.getString("roomer_no");
 				String roomer_name = rs.getString("roomer_name");
