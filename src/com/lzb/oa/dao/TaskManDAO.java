@@ -3,7 +3,12 @@ package com.lzb.oa.dao;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.alibaba.fastjson.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.entity.Response;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;
@@ -33,9 +38,9 @@ public class TaskManDAO {
 	public void setTotal(int total){
 		this.total = total;
 	}
-	public JSONArray getTaskInfo() {
+	public List<RoomerInfo> getTaskInfo() {
 		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
-		JSONArray tasks = new JSONArray();
+		List<RoomerInfo> mRoomerInfos = new ArrayList<RoomerInfo>();
 		try {
 
 			manager.connDB();
@@ -65,15 +70,13 @@ public class TaskManDAO {
 								: roomer_emp_no);
 				rInfo.setHouse_address(house_address);
 				rInfo.setHouse_city(house_city);
-				String json = JsonUtil.createJsonString(rInfo);
-				System.out.println(json);
-				tasks.add(json);
+				mRoomerInfos.add(rInfo);
 			}
+		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return tasks;
+		return mRoomerInfos;
 	}
 
 	/**

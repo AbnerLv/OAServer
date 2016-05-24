@@ -3,10 +3,8 @@ package com.lzb.oa.dao;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.entity.CustomerInfo;
 import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.util.JsonUtil;

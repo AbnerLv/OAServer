@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.dao.TaskManDAO;
+import com.lzb.oa.entity.RoomerInfo;
 import com.lzb.oa.servlet.BaseServlet;
 import com.lzb.oa.util.DevidePage;
 
@@ -20,7 +23,7 @@ import com.lzb.oa.util.DevidePage;
 @WebServlet(name = "TaskServlet", urlPatterns="/task_info.json")
 public class TaskServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    private JSONArray tasks = null;
+    private List<RoomerInfo> tasks = null;
     private int toatlData = 0;
     
     public TaskServlet(){
@@ -49,13 +52,16 @@ public class TaskServlet extends BaseServlet {
 		DevidePage pageU = new DevidePage(4, toatlData ,currentPage);
 		int start = pageU.getFromIndex();
 		int end = pageU.getToIndex();
+		Gson mGson = new Gson();
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();  //页面输出JSONArray的内容 
         if(start > end){
         	out.print("");  
 		}else{
-			out.print(tasks.subList(start, end));  
+			String json = mGson.toJson(tasks.subList(start, end));
+			System.out.println(json);
+			out.print(json);  
 		}
 		out.flush();
 		out.close();

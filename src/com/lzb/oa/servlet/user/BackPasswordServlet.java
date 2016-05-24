@@ -17,7 +17,7 @@ import com.lzb.oa.util.JsonUtil;
 /**
  * Íü¼ÇÃÜÂë
  * 
- * @author Abner
+ * @author lvzhenbin
  * @Date 2015-09-30
  */
 @WebServlet(name = "BackPasswordServlet", urlPatterns = "/back_password.json")
