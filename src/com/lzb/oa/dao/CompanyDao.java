@@ -8,21 +8,22 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.entity.MeettingEntity;
+import com.lzb.oa.entity.NoticeEntity;
 import com.lzb.oa.util.JsonUtil;
 
-public class MeetingDao {
+public class CompanyDao {
 	
 	private DBMan manager;
 	
-	private static MeetingDao dao;
+	private static CompanyDao dao;
 
-	public MeetingDao() throws ClassNotFoundException, IOException{
+	public CompanyDao() throws ClassNotFoundException, IOException{
 		manager = DBMan.getInstance();
 	}
-	public static MeetingDao getInstance()
+	public static CompanyDao getInstance()
 			throws ClassNotFoundException, IOException {
 		if (dao == null) {
-			dao = new MeetingDao();
+			dao = new CompanyDao();
 		}
 		return dao;
 	}
@@ -40,6 +41,27 @@ public class MeetingDao {
 				String content = rs.getString("meeting_content");
 				String address = rs.getString("meeting_address");
 				MeettingEntity entity = new MeettingEntity(theme,time,content,address,endTime);
+				infoList.add(entity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return infoList;
+	}
+	
+	
+	public List<NoticeEntity> getNoticeInfo(){
+		String sql = "select * from notice ";
+		List<NoticeEntity> infoList = new ArrayList<NoticeEntity>();
+		try {
+			manager.connDB();
+			ResultSet rs = manager.executeQuery(sql);
+			while (rs.next()) {
+				String theme = rs.getString("notice_theme");
+				String time = rs.getDate("notice_date").toString();
+				String content = rs.getString("notice_content");
+				String empNo = rs.getString("notice_emp_no");
+				NoticeEntity entity = new NoticeEntity(theme,time,content,empNo);
 				infoList.add(entity);
 			}
 		} catch (SQLException e) {
