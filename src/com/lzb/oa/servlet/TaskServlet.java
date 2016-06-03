@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.task;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.dao.TaskManDAO;
 import com.lzb.oa.entity.RoomerInfo;
-import com.lzb.oa.servlet.BaseServlet;
 import com.lzb.oa.util.DevidePage;
 
 /**

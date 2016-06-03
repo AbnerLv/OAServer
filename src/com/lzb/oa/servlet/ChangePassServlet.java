@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.user;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
 
@@ -11,38 +11,42 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.UserDAO;
 import com.lzb.oa.entity.Response;
-import com.lzb.oa.servlet.BaseServlet;
 import com.lzb.oa.util.JsonUtil;
 
 /**
- * ÓÃ»§×¢²á
+ * ÐÞ¸ÄÃÜÂë
+ * @author Abner
+ * @date 2015-10-2
+ *
  */
-@WebServlet(name="/ResgisterServlet", urlPatterns="/register.json")
-public class RegisterServlet extends BaseServlet {
+@WebServlet(name="ChangePassServlet",urlPatterns = "/change_pass.json")
+public class ChangePassServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
-   
+  
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		JSONObject jsonObj = getClientJSON(request);
-		String empPhoneNo = jsonObj.getString("empPhoneNo");
-		String empNickname = jsonObj.getString("empNickname");
-		String empNo = jsonObj.getString("empNo");
-		String empName = jsonObj.getString("empName");
-		String empPassword = jsonObj.getString("pass");
-		Response success = new Response();
-		int flag = 0;
+		String userName = jsonObj.getString("userName");
+		String oldPass = jsonObj.getString("oldPass");
+		String newPass = jsonObj.getString("newPass");
+		Response response2 = new Response();
+		int success = 0;
 		try {
-			flag = UserDAO.getInstance().register(empPhoneNo, empNickname, empNo, empName, empPassword);
+			success = UserDAO.getInstance().ChangePassword(userName, oldPass, newPass);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		success.setSuccess(""+flag);
-		sendXml(response, JsonUtil.createJsonString(success));
+		response2.setSuccess(success+"");
+		sendXml(response, JsonUtil.createJsonString(response2));
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		doGet(request, response);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.task;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
 
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.TaskManDAO;
-import com.lzb.oa.servlet.BaseServlet;
 
 /**
  * Servlet implementation class CancelTaskServlet

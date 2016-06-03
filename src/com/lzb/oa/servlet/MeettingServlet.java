@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.company;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,30 +15,28 @@ import com.google.gson.Gson;
 import com.lzb.oa.dao.CustomerManDAO;
 import com.lzb.oa.dao.CompanyDao;
 import com.lzb.oa.entity.MeettingEntity;
-import com.lzb.oa.entity.NoticeEntity;
-import com.lzb.oa.servlet.BaseServlet;
 
 /**
  * 获取客户的详细信息
  */
-@WebServlet(name="/NoticeServlet",urlPatterns="/get_notice_info.json")
-public class NoticeServlet extends BaseServlet {
+@WebServlet(name="/MeettingServlet",urlPatterns="/get_meetting_info.json")
+public class MeettingServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
-	    List<NoticeEntity> noticeList = null;
+	    List<MeettingEntity> meettingList = null;
 		Gson mGson = new Gson();
 		String json = null;
 		try {
-			noticeList = CompanyDao.getInstance().getNoticeInfo();
-			json = mGson.toJson(noticeList);
+			meettingList = CompanyDao.getInstance().getMeetingInfo();
+			json = mGson.toJson(meettingList);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		 //页面输出JSONArray的内容  
-		System.out.println("NoticeDetail---json---"+json);
+		System.out.println("MeetingDetail---json---"+json);
         PrintWriter out = response.getWriter();  
         out.print(json);  
         out.flush();

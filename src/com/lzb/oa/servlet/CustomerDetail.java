@@ -1,4 +1,4 @@
-package com.lzb.oa.servlet.task;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
 
@@ -9,35 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.dao.TaskManDAO;
-import com.lzb.oa.servlet.BaseServlet;
+import com.lzb.oa.dao.CustomerManDAO;
+import com.lzb.oa.dao.UserDAO;
 
 /**
- * 领取任务
+ * 获取客户的详细信息
  */
-@WebServlet(name="/GetTaskServlet",urlPatterns="/task/get_task.json")
-public class GetTaskServlet extends BaseServlet {
+@WebServlet(name="/CustomerDetail",urlPatterns="/get_customer_detail.json")
+public class CustomerDetail extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
- 
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		JSONObject jsonObj = getClientJSON(request);
-		String emp_no = jsonObj.getString("emp_no");
-		String roomer_no = jsonObj.getString("roomer_no");
-		String roomer_house_no = jsonObj.getString("roomer_house_no");
+		String roomerNo = jsonObj.getString("roomer_no");
+		String json = null;
 		try {
-			String json = TaskManDAO.getInstance().getTask(emp_no, roomer_no,roomer_house_no);
-			sendXml(response,json);
+			json = CustomerManDAO.getInstance().getCustomerDetailInfo(roomerNo);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+		sendXml(response, json);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		doGet(request, response);
 	}
 
 }

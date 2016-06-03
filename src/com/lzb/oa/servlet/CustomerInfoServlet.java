@@ -1,6 +1,7 @@
-package com.lzb.oa.servlet.customer;
+package com.lzb.oa.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,32 +9,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.dao.CustomerManDAO;
-import com.lzb.oa.dao.UserDAO;
-import com.lzb.oa.servlet.BaseServlet;
 
 /**
- * 获取客户的详细信息
+ * 获取顾客信息
+ * @author lzb
+ * @date 2015-10-2
  */
-@WebServlet(name="/CustomerDetail",urlPatterns="/get_customer_detail.json")
-public class CustomerDetail extends BaseServlet {
+@WebServlet(name="CustomerInfoServlet",urlPatterns="/customer_info.json")
+public class CustomerInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject jsonObj = getClientJSON(request);
-		String roomerNo = jsonObj.getString("roomer_no");
-		String json = null;
+		JSONArray info = null;
 		try {
-			json = CustomerManDAO.getInstance().getCustomerDetailInfo(roomerNo);
+			info = CustomerManDAO.getInstance().getCustomerInfo();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		sendXml(response, json);
+		response.setContentType("text/html;charset=utf-8");
+		 //页面输出JSONArray的内容  
+        PrintWriter out = response.getWriter();  
+        out.print(info);  
+        out.flush();
+        out.close();
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
