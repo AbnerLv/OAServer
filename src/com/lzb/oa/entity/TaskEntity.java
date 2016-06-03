@@ -1,6 +1,6 @@
 package com.lzb.oa.entity;
 
-public class RoomerInfo {
+public class TaskEntity {
 	
 	private String roomer_no;       //客户编号
 	private String roomer_name;     //客户姓名
@@ -85,37 +85,10 @@ public class RoomerInfo {
 	public void setRoomer_emp_no(String roomer_emp_no) {
 		this.roomer_emp_no = roomer_emp_no;
 	}
-	public RoomerInfo() {
+	public TaskEntity() {
 		
 	}
-	public RoomerInfo(String roomer_no, String roomer_name, String roomer_sex,
-			String roomer_phone_no, String roomer_email, String roomer_house_no,
-			String roomer_date, String roomer_period, String roomer_rent,
-			String roomer_complete, String roomer_emp_no) {
-		super();
-		this.roomer_no = roomer_no;
-		this.roomer_name = roomer_name;
-		this.roomer_sex = roomer_sex;
-		this.roomer_phone_no = roomer_phone_no;
-		this.roomer_email = roomer_email;
-		this.roomer_house_no = roomer_house_no;
-		this.roomer_date = roomer_date;
-		this.roomer_period = roomer_period;
-		this.roomer_rent = roomer_rent;
-		this.roomer_complete = roomer_complete;
-		this.roomer_emp_no = roomer_emp_no;
-	}
 	
-	
-	
-	public RoomerInfo(String roomer_no, String roomer_name,
-			String roomer_phone_no, String roomer_date) {
-		super();
-		this.roomer_no = roomer_no;
-		this.roomer_name = roomer_name;
-		this.roomer_phone_no = roomer_phone_no;
-		this.roomer_date = roomer_date;
-	}
 	public String getHouse_city() {
 		return house_city;
 	}
@@ -131,8 +104,49 @@ public class RoomerInfo {
 	public void setHouse_address(String house_address) {
 		this.house_address = house_address;
 	}
-
 	
+	public TaskEntity(String roomer_no, String roomer_name, String roomer_sex,
+			String roomer_phone_no, String roomer_email, String roomer_house_no,
+			String roomer_date, String roomer_period, String roomer_rent,
+			String roomer_complete, String roomer_emp_no) {
+		this.roomer_no = roomer_no;
+		this.roomer_name = roomer_name;
+		this.roomer_sex = roomer_sex;
+		this.roomer_phone_no = roomer_phone_no;
+		this.roomer_email = roomer_email;
+		this.roomer_house_no = roomer_house_no;
+		this.roomer_date = roomer_date;
+		this.roomer_period = roomer_period;
+		this.roomer_rent = roomer_rent;
+		this.roomer_complete = roomer_complete;
+		this.roomer_emp_no = roomer_emp_no;
+	}
 	
-
+	public TaskEntity(String roomer_no, String roomer_name,
+			String roomer_phone_no, String roomer_date) {
+		this.roomer_no = roomer_no;
+		this.roomer_name = roomer_name;
+		this.roomer_phone_no = roomer_phone_no;
+		this.roomer_date = roomer_date;
+	}
+	public TaskEntity(String roomer_no, String roomer_name, String roomer_sex,
+			String roomer_phone_no, String roomer_email,
+			String roomer_house_no, String roomer_date, String roomer_period,
+			String roomer_rent, String roomer_complete, String roomer_emp_no,
+			String house_city, String house_address) {
+		this.roomer_no = roomer_no;
+		this.roomer_name = roomer_name;
+		this.roomer_sex = roomer_sex;
+		this.roomer_phone_no = roomer_phone_no;
+		this.roomer_email = roomer_email;
+		this.roomer_house_no = roomer_house_no;
+		this.roomer_date = roomer_date;
+		this.roomer_period = roomer_period;
+		this.roomer_rent = roomer_rent;
+		this.roomer_complete = roomer_complete;
+		this.roomer_emp_no = roomer_emp_no;
+		this.house_city = house_city;
+		this.house_address = house_address;
+	}
+	
 }

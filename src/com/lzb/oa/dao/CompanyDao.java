@@ -9,7 +9,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.entity.MeettingEntity;
 import com.lzb.oa.entity.NoticeEntity;
-import com.lzb.oa.util.JsonUtil;
+import com.lzb.oa.utils.JsonUtil;
 
 public class CompanyDao {
 	

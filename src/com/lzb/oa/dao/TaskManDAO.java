@@ -10,8 +10,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.entity.Response;
-import com.lzb.oa.entity.RoomerInfo;
-import com.lzb.oa.util.JsonUtil;
+import com.lzb.oa.entity.TaskEntity;
+import com.lzb.oa.utils.JsonUtil;
 
 public class TaskManDAO {
 
@@ -38,9 +38,9 @@ public class TaskManDAO {
 	public void setTotal(int total){
 		this.total = total;
 	}
-	public List<RoomerInfo> getTaskInfo() {
+	public List<TaskEntity> getTaskInfo() {
 		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
-		List<RoomerInfo> mRoomerInfos = new ArrayList<RoomerInfo>();
+		List<TaskEntity> mRoomerInfos = new ArrayList<TaskEntity>();
 		try {
 
 			manager.connDB();
@@ -63,7 +63,7 @@ public class TaskManDAO {
 				String roomer_emp_no = rs.getString("roomer_emp_no");
 				String house_city = rs.getString("house_city");
 				String house_address = rs.getString("house_address");
-				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name,
+				TaskEntity rInfo = new TaskEntity(roomer_no, roomer_name,
 						roomer_sex, roomer_phone_no, null, roomer_house_no,
 						roomer_date, roomer_period, roomer_rent,
 						roomer_complete, roomer_emp_no == null ? ""

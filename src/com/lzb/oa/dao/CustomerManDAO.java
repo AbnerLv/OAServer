@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 import com.alibaba.fastjson.JSONArray;
 import com.lzb.oa.entity.CustomerInfo;
-import com.lzb.oa.entity.RoomerInfo;
-import com.lzb.oa.util.JsonUtil;
+import com.lzb.oa.entity.TaskEntity;
+import com.lzb.oa.utils.JsonUtil;
 
 public class CustomerManDAO {
 
@@ -40,7 +40,7 @@ public class CustomerManDAO {
 				String roomer_phone_no = rs.getString("roomer_phone_no");
 				String roomer_date = rs.getDate("roomer_date").toString();
 
-				RoomerInfo rInfo = new RoomerInfo(roomer_no, roomer_name,
+				TaskEntity rInfo = new TaskEntity(roomer_no, roomer_name,
 						roomer_phone_no, roomer_date);
 				String json = JsonUtil.createJsonString(rInfo);
 				info.add(json);

@@ -14,31 +14,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.SettingDAO;
 import com.lzb.oa.dao.TaskManDAO;
 
-/**
- * Servlet implementation class MyTaskServlet
- */
-@WebServlet(name="/MyTaskServlet",urlPatterns="/my_task.json")
-public class MyTaskServlet extends BaseServlet {
+
+@WebServlet(name="/HaveTasksServlet",urlPatterns="/getHaveTasks.json")
+public class HaveTasksServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject jsonObj = getClientJSON(request);
-		String emp_no = jsonObj.getString("emp_no");
+
+		String emp_no = request.getParameter("emp_no");
 		System.out.println("emp_no = " + emp_no);
-		JSONArray tasks = null;
 		try {
-			tasks = SettingDAO.getInstance().getMyTask(emp_no);
+			String tasksJson = SettingDAO.getInstance().getHaveTasks(emp_no);
+			sendXml(response,tasksJson);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		response.setContentType("text/html;charset=utf-8");
-		 //页面输出JSONArray的内容  
-        PrintWriter out = response.getWriter();  
-        out.print(tasks);  
-        out.flush();
-        out.close();
 	}
 
 	

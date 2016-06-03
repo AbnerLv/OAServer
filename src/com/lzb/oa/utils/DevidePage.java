@@ -1,4 +1,4 @@
-package com.lzb.oa.util;
+package com.lzb.oa.utils;
 
 public class DevidePage {
 	

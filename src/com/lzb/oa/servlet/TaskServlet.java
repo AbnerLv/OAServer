@@ -13,8 +13,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.dao.TaskManDAO;
-import com.lzb.oa.entity.RoomerInfo;
-import com.lzb.oa.util.DevidePage;
+import com.lzb.oa.entity.TaskEntity;
+import com.lzb.oa.utils.DevidePage;
 
 /**
  * Servlet implementation class TaskServlet
@@ -22,7 +22,7 @@ import com.lzb.oa.util.DevidePage;
 @WebServlet(name = "TaskServlet", urlPatterns="/task_info.json")
 public class TaskServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    private List<RoomerInfo> tasks = null;
+    private List<TaskEntity> tasks = null;
     private int toatlData = 0;
     
     public TaskServlet(){
