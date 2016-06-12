@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.dao.UserDAO;
-import com.lzb.oa.entity.Response;
+import com.lzb.oa.dao.UserDao;
+import com.lzb.oa.entity.ResponseEntity;
 import com.lzb.oa.utils.JsonUtil;
 
 /**
@@ -19,8 +19,8 @@ import com.lzb.oa.utils.JsonUtil;
  * @author lvzhenbin
  * @Date 2015-09-30
  */
-@WebServlet(name = "BackPasswordServlet", urlPatterns = "/back_password.json")
-public class BackPasswordServlet extends BaseServlet {
+@WebServlet(name = "ForgetPasswordServlet", urlPatterns = "/forgetPassword.json")
+public class ForgetPasswordServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -32,18 +32,10 @@ public class BackPasswordServlet extends BaseServlet {
 		String emp_phone_no = jsonObj.getString("phoneNo");
 		String emp_identify = jsonObj.getString("identify");
 
-		System.out.println("emp_no = " + emp_no + " emp_phone_no = "
-				+ emp_phone_no + " emp_identify = " + emp_identify);
-		
-		Response response2 = new Response();
-		String emp_password = null;
-		try {
-			emp_password = UserDAO.getInstance().BackPassword(emp_no, emp_phone_no, emp_identify);
-			response2.setEmp_password(emp_password);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		sendXml(response, JsonUtil.createJsonString(response2));
+		ResponseEntity entity = new ResponseEntity();
+		String emp_password = UserDao.getInstance().forgetPassword(emp_no, emp_phone_no, emp_identify);
+		entity.setMessage(emp_password);
+		sendXml(response, JsonUtil.createJsonString(entity));
 
 	}
 	

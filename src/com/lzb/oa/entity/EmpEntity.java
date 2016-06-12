@@ -1,6 +1,5 @@
 package com.lzb.oa.entity;
 
-import java.util.Date;
 
 public class EmpEntity {
 	private String emp_nickname;   //Í«≥∆

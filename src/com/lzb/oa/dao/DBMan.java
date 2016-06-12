@@ -36,7 +36,7 @@ public class DBMan {
 		this.dbPasswd = getString("dbpassword");
 
 		jdbcDrive = "com.mysql.jdbc.Driver";
-		strConn = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
+		strConn = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName+"?useUnicode=true&characterEncoding=UTF-8";
 	}
 
 	/**

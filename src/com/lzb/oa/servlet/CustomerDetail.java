@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.CustomerManDAO;
-import com.lzb.oa.dao.UserDAO;
+import com.lzb.oa.dao.UserDao;
 
 /**
  * 获取客户的详细信息

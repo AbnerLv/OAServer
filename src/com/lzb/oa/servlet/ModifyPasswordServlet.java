@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lzb.oa.dao.UserDAO;
-import com.lzb.oa.entity.Response;
+import com.lzb.oa.dao.UserDao;
+import com.lzb.oa.entity.ResponseEntity;
 import com.lzb.oa.utils.JsonUtil;
 
 /**
@@ -19,8 +19,8 @@ import com.lzb.oa.utils.JsonUtil;
  * @date 2015-10-2
  *
  */
-@WebServlet(name="ChangePassServlet",urlPatterns = "/change_pass.json")
-public class ChangePassServlet extends BaseServlet {
+@WebServlet(name="ModifyPasswordServlet",urlPatterns = "/modifyPassword.json")
+public class ModifyPasswordServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
   
@@ -28,18 +28,13 @@ public class ChangePassServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		JSONObject jsonObj = getClientJSON(request);
-		String userName = jsonObj.getString("userName");
-		String oldPass = jsonObj.getString("oldPass");
-		String newPass = jsonObj.getString("newPass");
-		Response response2 = new Response();
-		int success = 0;
-		try {
-			success = UserDAO.getInstance().ChangePassword(userName, oldPass, newPass);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		response2.setSuccess(success+"");
-		sendXml(response, JsonUtil.createJsonString(response2));
+		String userName = jsonObj.getString("username");
+		String oldPass = jsonObj.getString("oldPassword");
+		String newPass = jsonObj.getString("newPassword");
+		ResponseEntity entity = new ResponseEntity();
+		int code = UserDao.getInstance().modifyPassword(userName, oldPass, newPass);
+		entity.setCode(code);
+		sendXml(response, JsonUtil.createJsonString(entity));
 	}
 
 	/**

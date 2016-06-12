@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 import com.lzb.oa.dao.TaskManDAO;
 
-/**
- * Servlet implementation class CancelTaskServlet
- */
+
 @WebServlet(name = "/CancelTaskServlet", urlPatterns = "/task/cancel_task.json")
 public class CancelTaskServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,12 +21,9 @@ public class CancelTaskServlet extends BaseServlet {
 		JSONObject jsonObj = getClientJSON(request);
 		String roomer_no = jsonObj.getString("roomer_no");
 		String rommer_house_no = jsonObj.getString("roomer_house_no");
-		try {
-			String json = TaskManDAO.getInstance().cancelTask(roomer_no,rommer_house_no);
-			sendXml(response, json);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		String json = TaskManDAO.getInstance().cancelTask(roomer_no,rommer_house_no);
+		sendXml(response, json);
+		
 	}
 
 	protected void doPost(HttpServletRequest request,

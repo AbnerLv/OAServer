@@ -56,6 +56,7 @@ public class BaseServlet extends HttpServlet {
 	public void sendXml(HttpServletResponse response, String json)
 			throws IOException {
 		response.setContentType("text/html;charset=utf-8");
+		System.out.println("json result "+json);
 		OutputStream out = response.getOutputStream();
 		out.write(json.getBytes("utf-8"));
 		out.flush();

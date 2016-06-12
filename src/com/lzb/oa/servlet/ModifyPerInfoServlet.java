@@ -9,35 +9,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzb.oa.dao.UserDao;
+import com.lzb.oa.entity.EmpEntity;
 import com.lzb.oa.entity.ResponseEntity;
 import com.lzb.oa.utils.JsonUtil;
 
 /**
- * ÓÃ»§×¢²á
+ * ÐÞ¸ÄÃÜÂë
+ * @author Abner
+ * @date 2015-10-2
+ *
  */
-@WebServlet(name="/ResgisterServlet", urlPatterns="/register.json")
-public class RegisterServlet extends BaseServlet {
+@WebServlet(name="ModifyPerInfoServlet",urlPatterns = "/modifyPerInfo.json")
+public class ModifyPerInfoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject jsonObj = getClientJSON(request);
-		String empPhoneNo = jsonObj.getString("empPhoneNo");
-		String empNickname = jsonObj.getString("empNickname");
-		String empNo = jsonObj.getString("empNo");
-		String empName = jsonObj.getString("empName");
-		String empPassword = jsonObj.getString("pass");
-		ResponseEntity success = new ResponseEntity();
-		int code = UserDao.getInstance().register(empPhoneNo, empNickname, empNo, empName, empPassword);
+  
 	
-		success.setSuccess(""+code);
-		sendXml(response, JsonUtil.createJsonString(success));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		JSONObject jsonObj = getClientJSON(request);
+		Gson gson = new Gson();
+		EmpEntity empEntity = gson.fromJson(jsonObj.toString(),  new TypeToken<EmpEntity>(){}.getType());
+		ResponseEntity entity = new ResponseEntity();
+		int code = UserDao.getInstance().modifyPerInfo(empEntity);
+		entity.setCode(code);
+		sendXml(response, JsonUtil.createJsonString(entity));
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		doGet(request, response);
 	}
 
 }

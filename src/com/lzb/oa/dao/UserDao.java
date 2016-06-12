@@ -5,25 +5,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.lzb.oa.entity.EmpEntity;
 import com.lzb.oa.entity.EmpInfo;
 import com.lzb.oa.utils.JsonUtil;
 
-public class UserDAO {
+public class UserDao {
 
 	private DBMan manager;
-	private static UserDAO dao = null;
+	private static UserDao dao = null;
 
-	public static UserDAO getInstance() throws ClassNotFoundException,
-			IOException {
+	public static UserDao getInstance() {
 		if (dao == null) {
-			dao = new UserDAO();
+			try{
+			dao = new UserDao();
+			}catch(Exception e){
+				System.out.println("UserDAO Exception "+e.getMessage());
+			}
 		}
 		return dao;
 	}
 
-	public UserDAO() throws ClassNotFoundException, IOException {
+	public UserDao() throws ClassNotFoundException, IOException {
 		manager = DBMan.getInstance();
 
 	}
@@ -42,13 +44,11 @@ public class UserDAO {
 		String sql = "select * from emp_info where emp_password='" + password
 				+ "' and emp_nickname='" + username + "' or emp_no ='"
 				+ username + "' or emp_phone_no='" + username + "'";
+		System.out.println("checkLogin sql = " + sql);
 		String json = null;
 		try {
 			manager.connDB();
 			ResultSet rs =  manager.executeQuery(sql);
-			
-			System.out.println("sql = " + sql);
-			
 			while(rs.next()){
 				String emp_nickname = rs.getString("emp_nickname");
 				String emp_name = rs.getString("emp_name");
@@ -82,11 +82,12 @@ public class UserDAO {
 		return json;
 	}
 
-	public String BackPassword(String emp_no, String emp_phone_no,
+	public String forgetPassword(String emp_no, String emp_phone_no,
 			String emp_identify) {
 		String sql = "select emp_password from emp_info where emp_no = '"
 				+ emp_no + "' and emp_phone_no = '" + emp_phone_no
 				+ "' and emp_identify = '" + emp_identify + "'";
+		System.out.println("forgetPassword sql = " + sql);
 		String password = null;
 		try {
 			manager.connDB();
@@ -97,11 +98,10 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("password = " + password);
 		return password;
 	}
 
-	public int ChangePassword(String username, String oldPassword,
+	public int modifyPassword(String username, String oldPassword,
 			String newPassword) {
 		String sql = "update emp_info set emp_password = '" + newPassword
 				+ "' where emp_password='" + oldPassword
@@ -121,7 +121,7 @@ public class UserDAO {
 	public int register(String empPhoneNo, String empNickname,
 			String empNo, String empName, String empPassword) {
 		int flag = 0;
-		String sql = "update emp_info set emp_nickname = '" + empNickname
+		String sql = "INSERT INTO  emp_info set emp_nickname = '" + empNickname
 				+ "',emp_name = '" + empName + "', emp_phone_no = '"
 				+ empPhoneNo + "',emp_password = '" + empPassword
 				+ "' where emp_no = '" + empNo + "'";
@@ -133,6 +133,14 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+	
+	/**
+	 * 修改个人信息
+	 * @return
+	 */
+	public int modifyPerInfo(EmpEntity entity){
+		return 0;
 	}
 
 }

@@ -6,10 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lzb.oa.entity.Response;
+import com.lzb.oa.entity.ResponseEntity;
 import com.lzb.oa.entity.TaskEntity;
 import com.lzb.oa.utils.JsonUtil;
 
@@ -17,12 +15,14 @@ public class TaskManDAO {
 
 	private DBMan manager;
 	private static TaskManDAO dao;
-	private int total=0;
 
-	public static TaskManDAO getInstance() throws ClassNotFoundException,
-			IOException {
+	public static TaskManDAO getInstance(){
 		if (dao == null) {
+			try{
 			dao = new TaskManDAO();
+			}catch(Exception e){
+				System.out.println("TaskManDAO 对象创建失败" + e.getMessage());
+			}
 		}
 		return dao;
 	}
@@ -31,25 +31,13 @@ public class TaskManDAO {
 		manager = DBMan.getInstance();
 	}
 
-	public int getTotal(){
-		return total;
-	}
-	
-	public void setTotal(int total){
-		this.total = total;
-	}
-	public List<TaskEntity> getTaskInfo() {
-		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no order by roomer_date desc, roomer_period asc";
+	public String getNotHaveTasks() {
+		String sql = "select roomer_info.*,house_city, house_address from roomer_info, house_info where roomer_info.roomer_house_no = house_info.house_no and ISNULL(roomer_emp_no) order by roomer_date desc, roomer_period asc";
 		List<TaskEntity> mRoomerInfos = new ArrayList<TaskEntity>();
 		try {
 
 			manager.connDB();
 			ResultSet rs = manager.executeQuery(sql);
-			rs.last();
-			int temp = rs.getRow();
-			System.out.println("TotalData = "+temp );
-			setTotal(temp);
-			rs.beforeFirst();
 			while (rs.next()) {
 				String roomer_no = rs.getString("roomer_no");
 				String roomer_name = rs.getString("roomer_name");
@@ -76,7 +64,8 @@ public class TaskManDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return mRoomerInfos;
+		Gson gson = new Gson();
+		return gson.toJson(mRoomerInfos);
 	}
 
 	/**
@@ -96,7 +85,7 @@ public class TaskManDAO {
 			manager.connDB();
 			int result_r = manager.executeUpdate(roomer_sql);
 			int result_h = manager.executeUpdate(house_sql);
-			Response resp = new Response();
+			ResponseEntity resp = new ResponseEntity();
 			if(result_r > 0 && result_h > 0){
 				resp.setSuccess("1");
 			}else{
@@ -123,7 +112,7 @@ public class TaskManDAO {
 			manager.connDB();
 			int result_r = manager.executeUpdate(roomer_sql);
 			int result_h = manager.executeUpdate(house_sql);
-			Response resp = new Response();
+			ResponseEntity resp = new ResponseEntity();
 			if(result_r > 0 && result_h > 0){
 				resp.setSuccess("1");
 			}else{
